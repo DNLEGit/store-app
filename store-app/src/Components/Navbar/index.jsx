@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
+import { ShoppingCartContext } from "../../Context";
+import { useContext } from "react";
+
 
 const Navbar = () =>{
+    const context = useContext(ShoppingCartContext)
 
-    const activeStyle = 'underline underline-offset-4 bg-green-300'
+    const activeStyle = 'underline underline-offset-4'
 
 return (
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm bg-green-600'>
@@ -99,8 +103,9 @@ return (
                     Sing In
                 </NavLink>
             </li>
-            <li>
-                <MdAddShoppingCart />
+            <li className='flex justify-between items-center'>
+                <MdAddShoppingCart /> {context.count}
+               
             </li>
             
         </ul>
