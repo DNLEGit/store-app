@@ -3,8 +3,9 @@ import { ShoppingCartContext } from '../../Context';
 
 
 const OrderCard = (props) => {
-    const { title, imageUrl, price } = props
+    const { id, title, imageUrl, price, handleDelete } = props
     const context = useContext(ShoppingCartContext)
+
     return (
         <div className='flex justify-between items-center p-2'>
 
@@ -18,7 +19,7 @@ const OrderCard = (props) => {
 
             <div className='flex items-center gap-2'>
                 <p className='text-lg font-medium'>{props.price}</p>
-                <div onClick={context.closeCheckOutSideMenu} className='cursor-pointer'>
+                <div onClick={() => handleDelete(id)} className='cursor-pointer'>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

@@ -2,13 +2,25 @@ import React, { useContext } from 'react';
 import './styles.css';
 import { ShoppingCartContext } from '../../Context';
 import { OrderCard } from '../OrderCard';
+import { totalPrice } from '../../utils';
+
 
 function CheckOutSideMenu() {
   const context = useContext(ShoppingCartContext);
+  const handleDelete = (id) => {
+    const filteredProducts = context.order.filter(product => product.id !== id);
+    context.setOrder(filteredProducts);
+}
+  const handleCheckout = () =>{
+    const orderToAdd = {
+      
+    }
+  }
+
 
   return (
-    <aside className={`${context.isCheckOutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 top-0 w-80 h-screen border border-black rounded-lg bg-green-400 overflow-y-auto`}>
-      <div className='flex justify-between items-center p-3 sticky top-0 bg-green-400 z-10'>
+    <aside className={`${context.isCheckOutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 top-0 w-80 mb-2 border-black rounded-lg bg-green-400 overflow-y-auto`}>
+      <div className='flex justify-between items-center p-3 top-0 bg-green-400 '>
         <h2 className='font-medium text-xl'>My Order</h2>
         <div onClick={context.closeCheckOutSideMenu} className='cursor-pointer'>
           <svg
@@ -28,17 +40,26 @@ function CheckOutSideMenu() {
         </div>
       </div>
   
-      <div className='flex flex-col gap-2 p-3'>
+      <div className='px-3 overflow-auto max-h-min scrollbar-thumb-gray-900 '>
         {
-          context.cartProducts.map(product => (
+          context.order.map(product => (
             <OrderCard 
               key={product.id}
+              id={product.id}
               title={product.title}
               imageUrl={product.image}
               price={product.price}
+              handleDelete={handleDelete}
             />
           ))
         }
+      </div>
+      <div className='flex justify-between px-6'>
+        <p>
+        <span>Total: </span>
+        <span>${totalPrice(context.order)}</span>
+        </p>
+        <button onClick= {() => handleCheckout()}>Checkout</button>
       </div>
     </aside>
   );
