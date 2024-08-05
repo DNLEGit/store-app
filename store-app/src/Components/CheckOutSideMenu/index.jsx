@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import './styles.css';
 import { ShoppingCartContext } from '../../Context';
+import { OrderCard } from '../OrderCard';
 
 function CheckOutSideMenu() {
   const context = useContext(ShoppingCartContext);
 
   return (
-    <aside className={`${context.isCheckOutMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 border hover:overflow-y-auto h-full border-black rounded-lg bg-green-400`}>
-      <div className='flex justify-between items-center p-3'>
+    <aside className={`${context.isCheckOutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 top-0 w-80 h-screen border border-black rounded-lg bg-green-400 overflow-y-auto`}>
+      <div className='flex justify-between items-center p-3 sticky top-0 bg-green-400 z-10'>
         <h2 className='font-medium text-xl'>My Order</h2>
-        <div onClick={context.closeCheckOutMenu} className='cursor-pointer'>
+        <div onClick={context.closeCheckOutSideMenu} className='cursor-pointer'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -26,8 +27,19 @@ function CheckOutSideMenu() {
           </svg>
         </div>
       </div>
-     
-
+  
+      <div className='flex flex-col gap-2 p-3'>
+        {
+          context.cartProducts.map(product => (
+            <OrderCard 
+              key={product.id}
+              title={product.title}
+              imageUrl={product.image}
+              price={product.price}
+            />
+          ))
+        }
+      </div>
     </aside>
   );
 }

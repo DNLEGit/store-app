@@ -1,8 +1,7 @@
 .check-out-side-menu{
-
     width: 360px;
-    height: calc(100hv - 68px);
+    max-height: 100vh;
     top: 68px;
-
+    bottom: 68px;
 }
 

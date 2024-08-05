@@ -7,7 +7,7 @@ function ProductDetail() {
 
   return (
     <aside className={`${context.isProductDetailOpen ? 'flex' : 'hidden'} product-detail flex-col fixed right-0 border hover:overflow-y-auto h-full border-black rounded-lg bg-green-400`}>
-      <div className='flex justify-between items-center p-3'>
+      <div className='flex justify-between items-center p-1'>
         <h2 className='font-medium text-xl'>Detail</h2>
         <div onClick={context.closeProductDetail} className='cursor-pointer'>
           <svg
@@ -26,15 +26,15 @@ function ProductDetail() {
           </svg>
         </div>
       </div>
-      <div className='flex flex-col p-6 h-full'>
+      <div className='flex flex-col p-6 h-fit'>
             <img 
-                className='w-[calc(100%-60px)] h-auto mx-auto mb-4' // Agrega un margen inferior para separar la imagen del texto
+                className='h-44 w-auto mx-auto mb-4' // Agrega un margen inferior para separar la imagen del texto
                 src={context.productToShow.image} 
                 alt=""
             />
-            <div className='text-lg font-semibold'>{context.productToShow.title}</div>
+            <div className='text-sm font-semibold'>{context.productToShow.title}</div>
             <div className='text-sm text-gray-500'>{context.productToShow.category}</div>
-            <div className='mt-2'>{context.productToShow.description}</div>
+            <div className='mt-2 mb-15 text-xs '>{context.productToShow.description}</div>
       </div>
 
     </aside>

@@ -13,7 +13,8 @@ function Card({ data }) {
 
   // Función para agregar los productos al carrito
   const addProductsToCart = (productData) => {
-    context.setCartProducts([...context.cartProducts, productData]); // Agrega los productos al final del arreglo del carrito
+    context.setCartProducts([...context.cartProducts, productData]);// Agrega los productos al final del arreglo del carrito
+    
   };
 
   // Maneja el clic en el botón de añadir al carrito
@@ -21,7 +22,8 @@ function Card({ data }) {
     event.stopPropagation(); // Evita que el clic se propague al contenedor de la tarjeta
     context.setCount(context.count + 1); // Incrementa el contador de productos en el carrito
     addProductsToCart(data); // Llama a la función para agregar el producto al carrito
-    
+    context.openCheckOutSideMenu(); //Abre el checkout side menu
+    console.log('isCheckOutSideMenuOpen:', context.isCheckOutSideMenuOpen);
   };
 
   return (
