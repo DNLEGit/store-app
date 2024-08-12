@@ -5,6 +5,9 @@ import { OrderCard } from "../../Components/OrderCard";
 import { Link } from "react-router-dom"
 function MyOrder() {
   const context = useContext(ShoppingCartContext);
+  const currentPath = window.location.pathname;
+  let index = currentPath.substring(currentPath.lastIndexOf('/') + 1 )
+  if(index === 'last') index = context.order?.length - 1;
 
   return (
     <Layout>
@@ -21,7 +24,7 @@ function MyOrder() {
 
       <div className='px-3 overflow-auto max-h-min scrollbar-thumb-gray-900 flex-1'>
         {
-          context.order?.slice(-1)[0].products.map(product => (
+          context.order?.[index]?.products.map(product => (
             <OrderCard 
               key={product.id}
               id={product.id}

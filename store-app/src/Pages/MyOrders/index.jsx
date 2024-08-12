@@ -7,21 +7,22 @@ import { OrdersCard } from "../../Components/OrdersCard"
 
 function MyOrders() {
   const context = useContext(ShoppingCartContext)
-
+  
   return (
     <Layout>
       <div className='flex items-center justify-center relative w-80'>       
-        <h1>My Orders</h1>
+        <h1 className='p-6'>My Orders</h1>
       </div>
 
       {
-        context.order.map(( order, index ) => {
-          <Link key={index} to={`/my-orders/${order.id}`}>
+        context.order.map(( order, index ) => (
+          <Link key={index} to={`/my-orders/${index}`}>
           <OrdersCard
+          timeAndDate={order.timeAndDateOfOrder}
           totalPrice={order.totalPrice}
           totalProducts={order.totalProducts}/>
           </Link>
-        })
+        ))
       }
 
     </Layout>

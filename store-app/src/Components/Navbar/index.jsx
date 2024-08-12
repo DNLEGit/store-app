@@ -28,11 +28,11 @@ return (
             </li>
             <li>
                 <NavLink 
-                    to='/clothes'
+                    to='/men-clothing'
                     className={({isActive}) =>
                     isActive ? activeStyle : undefined }
                 >
-                    Clothes
+                    Men's Clothing
                 </NavLink>
             </li>
             <li>
@@ -46,31 +46,23 @@ return (
             </li>
             <li>
                 <NavLink 
-                    to='/furniture'
+                    to='/jewelery'
                     className={({isActive}) =>
                     isActive ? activeStyle : undefined }
                 >
-                    Furniture
+                    Jewelery
                 </NavLink>
             </li>
             <li>
                 <NavLink 
-                    to='/toys'
+                    to='/women-clothing'
                     className={({isActive}) =>
                     isActive ? activeStyle : undefined }
                 >
-                    Toys
+                    Women's Clothing
                 </NavLink>
             </li>
-            <li>
-                <NavLink 
-                    to='/other'
-                    className={({isActive}) =>
-                    isActive ? activeStyle : undefined }
-                >
-                    Other
-                </NavLink>
-            </li>
+            
         </ul>
         <ul className='flex items-center gap-4'>
             <li>

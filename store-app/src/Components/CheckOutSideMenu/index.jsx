@@ -15,7 +15,7 @@ function CheckOutSideMenu() {
   /* Logica del boton de checkout */
   const handleCheckout = () =>{
     const orderToAdd = {
-      timeAndDateOfOrder : new Date().toISOString(),
+      timeAndDateOfOrder: new Date().toISOString().slice(0, 10),
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts)
@@ -23,7 +23,8 @@ function CheckOutSideMenu() {
 
     context.setOrder([...context.order, orderToAdd]);
     context.setCartProducts([])
-    context.closeCheckOutSideMenu;
+    context.setCount(0)
+    context.closeCheckOutSideMenu();
 
   } 
 
@@ -67,7 +68,7 @@ function CheckOutSideMenu() {
       <div className='flex justify-between px-6'>
         <p>
         <span>Total: </span>
-        <span>${totalPrice(context.cartProducts)}</span>
+        <span>${totalPrice(context.cartProducts).toFixed(2)}</span>
         </p>
         <Link to='/my-orders/last'>
 
