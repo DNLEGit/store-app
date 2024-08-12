@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
 import { ShoppingCartContext } from '../../Context';
 import { OrderCard } from '../OrderCard';
@@ -8,14 +9,23 @@ import { totalPrice } from '../../utils';
 function CheckOutSideMenu() {
   const context = useContext(ShoppingCartContext);
   const handleDelete = (id) => {
-    const filteredProducts = context.order.filter(product => product.id !== id);
-    context.setOrder(filteredProducts);
+    const filteredProducts = context.cartProducts.filter(product => product.id !== id);
+    context.setCartProducts(filteredProducts);
 }
+  /* Logica del boton de checkout */
   const handleCheckout = () =>{
     const orderToAdd = {
-      
-    }
-  }
+      timeAndDateOfOrder : new Date().toISOString(),
+      products: context.cartProducts,
+      totalProducts: context.cartProducts.length,
+      totalPrice: totalPrice(context.cartProducts)
+    };
+
+    context.setOrder([...context.order, orderToAdd]);
+    context.setCartProducts([])
+    context.closeCheckOutSideMenu;
+
+  } 
 
 
   return (
@@ -40,9 +50,9 @@ function CheckOutSideMenu() {
         </div>
       </div>
   
-      <div className='px-3 overflow-auto max-h-min scrollbar-thumb-gray-900 '>
+      <div className='px-3 overflow-auto max-h-min scrollbar-thumb-gray-900 flex-1'>
         {
-          context.order.map(product => (
+          context.cartProducts.map(product => (
             <OrderCard 
               key={product.id}
               id={product.id}
@@ -57,9 +67,15 @@ function CheckOutSideMenu() {
       <div className='flex justify-between px-6'>
         <p>
         <span>Total: </span>
-        <span>${totalPrice(context.order)}</span>
+        <span>${totalPrice(context.cartProducts)}</span>
         </p>
-        <button onClick= {() => handleCheckout()}>Checkout</button>
+        <Link to='/my-orders/last'>
+
+        <button className='bg-black p-3 text-white rounded-lg mb-2'
+         onClick= {() => handleCheckout()}
+         >Checkout</button>
+
+        </Link>
       </div>
     </aside>
   );

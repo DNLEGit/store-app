@@ -13,7 +13,7 @@ function Card({ data }) {
 
   // Función para agregar los productos al carrito
   const addProductsToCart = (productData) => {
-    context.setOrder([...context.order, productData]);// Agrega los productos al final del arreglo del carrito
+    context.setCartProducts([...context.cartProducts, productData]);// Agrega los productos al final del arreglo del carrito
     
   };
 
@@ -27,7 +27,7 @@ function Card({ data }) {
   };
   /* Funcion para evitar ingresar dos veces el mismo item al carrito */
   const renderIcon = (id) => {
-    const isInCart = context.order.filter(product => product.id === id).length > 0 ;
+    const isInCart = context.cartProducts.filter(product => product.id === id).length > 0 ;
     if(isInCart){
       return (
        <div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2' >
