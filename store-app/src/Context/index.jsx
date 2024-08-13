@@ -38,17 +38,47 @@ export const ShoppingCartProvider = ({children}) => {
     const [ order, setOrder ] = useState([]);
 
     /* Estado para buscar por nombre de items */
-    const [searchByTitle, setSearchByTitle] = useState(null);
+    const [searchByTitle, setSearchByTitle] = useState('');
 
     /* Estado para filtrar entre los items que existen en la api */
-    const [filteredItems, setFilteredItems] = useState(null);
+    const [filteredItems, setFilteredItems] = useState([]);
 
+      
+    /* Funcion que se encarga de filtrar entre los titulos de los items  */
     const filteredItemsByTitle = (items, searchByTitle) => {
-        return items?.filter(items.title.toLoeweCase().includes(searchByTitle.toLoeweCase())); 
+        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase())); 
     }
-    useEffect(()=>{
-        if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle)) 
-    }, (items, searchByTitle))
+    
+
+    /* Estado para filtrar por categoria */
+    const [searchByCategory , setSearchByCategory] = useState(null)
+
+    /* Funcion que se encarga de filtrar entre las categorias */
+    const filteredItemsByCategory = (items, searchByCategory) => {
+      return items?.filter(item => item.category.toLowerCase() === searchByCategory.toLowerCase());
+    };
+
+    useEffect(() => {
+      if (items) {
+          let filtered = items;
+  
+          // Filtrar por título si hay un término de búsqueda
+          if (searchByTitle) {
+              filtered = filteredItemsByTitle(filtered, searchByTitle);
+          }
+  
+          // Filtrar por categoría si hay una categoría seleccionada
+          if (searchByCategory) {
+              filtered = filteredItemsByCategory(filtered, searchByCategory);
+          }
+  
+          setFilteredItems(filtered);
+      } else {
+          setFilteredItems([]); // Opcional, para limpiar los filtros si no hay items
+      }
+  }, [items, searchByTitle, searchByCategory]);
+  
+
     return (
         <ShoppingCartContext.Provider value ={{
             count,
@@ -69,8 +99,11 @@ export const ShoppingCartProvider = ({children}) => {
             items, 
             setItems,
             searchByTitle,
-            setSearchByTitle
-
+            setSearchByTitle,
+            filteredItems,
+            setFilteredItems,
+            searchByCategory,
+            setSearchByCategory
         }} >
             {children}
         </ShoppingCartContext.Provider>

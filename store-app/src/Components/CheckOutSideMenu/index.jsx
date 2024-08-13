@@ -30,8 +30,8 @@ function CheckOutSideMenu() {
 
 
   return (
-    <aside className={`${context.isCheckOutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 top-0 w-80 mb-2 border-black rounded-lg bg-green-400 overflow-y-auto`}>
-      <div className='flex justify-between items-center p-3 top-0 bg-green-400 '>
+    <aside className={`${context.isCheckOutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 top-0 w-80 mb-2 border-black rounded-lg bg-[#6d8b93] overflow-y-auto`}>
+      <div className='flex justify-between items-center p-3 top-0 bg-[#6d8b93] '>
         <h2 className='font-medium text-xl'>My Order</h2>
         <div onClick={context.closeCheckOutSideMenu} className='cursor-pointer'>
           <svg

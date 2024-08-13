@@ -10,7 +10,7 @@ function MyOrder() {
   if(index === 'last') index = context.order?.length - 1;
 
   return (
-    <Layout>
+    <Layout className= 'bg-gray-300'>
       <div className='flex items-center justify-center relative w-80'>
         
         <Link to='/my-orders' className="absolute left-0">

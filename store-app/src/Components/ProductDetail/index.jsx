@@ -6,7 +6,7 @@ function ProductDetail() {
   const context = useContext(ShoppingCartContext);
 
   return (
-    <aside className={`${context.isProductDetailOpen ? 'flex' : 'hidden'} product-detail flex-col fixed right-0 border hover:overflow-y-auto h-full border-black rounded-lg bg-green-400`}>
+    <aside className={`${context.isProductDetailOpen ? 'flex' : 'hidden'} product-detail flex-col fixed right-0 border hover:overflow-y-auto h-full border-black rounded-lg bg-[#6d8b93]`}>
       <div className='flex justify-between items-center p-1'>
         <h2 className='font-medium text-xl'>Detail</h2>
         <div onClick={context.closeProductDetail} className='cursor-pointer'>
